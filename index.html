@@ -1,110 +1,582 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Webpage Title (will show on tab) -->
-    <title>Professional Portfolio</title>
-    <style>
-        /* Basic styling for the page */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            line-height: 1.6;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
-        nav {
-            margin: 1rem 0;
-        }
-        nav a {
-            color: #fff;
-            text-decoration: none;
-            margin: 0 1rem;
-        }
-        section {
-            padding: 2rem;
-            border-bottom: 1px solid #ddd;
-        }
-        footer {
-            text-align: center;
-            padding: 1rem;
-            background: #333;
-            color: #fff;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eva Casalins-DeBoskey</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blush:    #f5d6dc;
+      --peach:    #fce8d8;
+      --butter:   #fdf3d0;
+      --sage:     #d4e8d8;
+      --sky:      #cde3f0;
+      --lavender: #e8dff5;
+      --cream:    #fdf8f2;
+      --text:     #4a3f3a;
+      --muted:    #8a7570;
+      --accent:   #c97b8a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 40% at 10% 20%, #fce8d880 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 85% 10%, #cde3f070 0%, transparent 55%),
+        radial-gradient(ellipse 40% 60% at 70% 80%, #d4e8d860 0%, transparent 50%),
+        radial-gradient(ellipse 55% 35% at 30% 90%, #f5d6dc60 0%, transparent 55%),
+        radial-gradient(ellipse 45% 45% at 90% 55%, #fdf3d070 0%, transparent 50%);
+      z-index: -1;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      padding: 1.1rem 2rem;
+      background: rgba(253, 248, 242, 0.82);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201, 123, 138, 0.15);
+    }
+
+    nav a {
+      font-size: 0.78rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+      font-weight: 500;
+    }
+    nav a:hover { color: var(--accent); }
+
+    .hero {
+      min-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 2rem 4rem;
+      position: relative;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--blush);
+      color: var(--accent);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 0.45rem 1.2rem;
+      border-radius: 100px;
+      margin-bottom: 1.8rem;
+      border: 1px solid rgba(201, 123, 138, 0.25);
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3.2rem, 8vw, 6.5rem);
+      font-weight: 300;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.75;
+      font-weight: 300;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      border-radius: 100px;
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      font-weight: 500;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 20px rgba(201, 123, 138, 0.35);
+    }
+    .btn-outline {
+      background: transparent;
+      color: var(--accent);
+      border: 1.5px solid var(--accent);
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.55;
+      animation: float 8s ease-in-out infinite;
+      pointer-events: none;
+    }
+    .blob-1 { width: 180px; height: 180px; background: var(--blush); top: 12%; left: 5%; animation-delay: 0s; }
+    .blob-2 { width: 120px; height: 120px; background: var(--sky); top: 20%; right: 8%; animation-delay: -3s; }
+    .blob-3 { width: 90px; height: 90px; background: var(--sage); bottom: 18%; left: 12%; animation-delay: -5s; }
+    .blob-4 { width: 150px; height: 150px; background: var(--butter); bottom: 10%; right: 6%; animation-delay: -1.5s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50%       { transform: translateY(-18px) scale(1.04); }
+    }
+
+    .section {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin-bottom: 2.5rem;
+    }
+    .section-label span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, rgba(201,123,138,0.3), transparent);
+    }
+
+    h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: var(--text);
+    }
+    h2 em { font-style: italic; color: var(--accent); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+    @media (max-width: 640px) { .about-grid { grid-template-columns: 1fr; } }
+
+    .about-text p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.85;
+      font-weight: 300;
+      margin-bottom: 1rem;
+    }
+
+    .about-card {
+      background: linear-gradient(135deg, var(--blush), var(--lavender));
+      border-radius: 24px;
+      padding: 2.5rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.6);
+    }
+    .about-card .avatar {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 400;
+      color: var(--accent);
+      border: 2px solid rgba(201,123,138,0.3);
+    }
+    .about-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.3rem;
+    }
+    .about-card p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(255,255,255,0.7);
+      text-decoration: none;
+      display: block;
+      transition: transform 0.25s, box-shadow 0.25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+    }
+    .project-card::before {
+      content: '';
+      position: absolute;
+      top: -30px; right: -30px;
+      width: 100px; height: 100px;
+      border-radius: 50%;
+      opacity: 0.35;
+    }
+    .pc-pink  { background: linear-gradient(140deg, var(--blush) 0%, #fce8e8 100%); }
+    .pc-blue  { background: linear-gradient(140deg, var(--sky) 0%, #e4f0fb 100%); }
+    .pc-green { background: linear-gradient(140deg, var(--sage) 0%, #e6f4e8 100%); }
+    .pc-gold  { background: linear-gradient(140deg, var(--butter) 0%, #fdf0c0 100%); }
+
+    .pc-pink::before  { background: #f5a0b0; }
+    .pc-blue::before  { background: #90c8e8; }
+    .pc-green::before { background: #90ccA0; }
+    .pc-gold::before  { background: #f0d878; }
+
+    .project-card .tag {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 100px;
+      background: rgba(255,255,255,0.6);
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-weight: 500;
+    }
+    .project-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.6rem;
+    }
+    .project-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.7;
+      font-weight: 300;
+    }
+    .project-card .link {
+      display: inline-block;
+      margin-top: 1.2rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 500;
+      text-decoration: none;
+    }
+    .project-card .link::after { content: ' →'; }
+
+    .cred-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .cred-item {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      background: rgba(255,255,255,0.55);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      backdrop-filter: blur(8px);
+      transition: transform 0.2s;
+    }
+    .cred-item:hover { transform: translateX(5px); }
+
+    .cred-icon {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+    .ci-pink   { background: var(--blush); }
+    .ci-blue   { background: var(--sky); }
+    .ci-green  { background: var(--sage); }
+    .ci-yellow { background: var(--butter); }
+
+    .cred-info h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+    .cred-info p {
+      font-size: 0.82rem;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    .contact-wrap {
+      background: linear-gradient(135deg, var(--blush) 0%, var(--sky) 50%, var(--sage) 100%);
+      border-radius: 28px;
+      padding: 3.5rem;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,0.7);
+    }
+    .contact-wrap h2 { margin-bottom: 0.8rem; }
+    .contact-wrap > p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 300;
+      margin-bottom: 2rem;
+      line-height: 1.7;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255,255,255,0.65);
+      border: 1px solid rgba(255,255,255,0.9);
+      border-radius: 100px;
+      padding: 0.65rem 1.4rem;
+      font-size: 0.85rem;
+      color: var(--text);
+      text-decoration: none;
+      font-weight: 400;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .contact-chip:hover {
+      background: rgba(255,255,255,0.9);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      border-top: 1px solid rgba(201,123,138,0.15);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .petal-divider {
+      text-align: center;
+      color: rgba(201,123,138,0.4);
+      font-size: 1.2rem;
+      letter-spacing: 0.5em;
+      margin: 0;
+      padding: 0.5rem 0;
+    }
+  </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <h1>Welcome to My Portfolio</h1>
-        <nav>
-            <a href="#about">About Me</a>
-            <a href="#projects">Projects</a>
-            <a href="#credentials">Credentials</a>
-            <a href="#contact">Contact Info</a>
-        </nav>
-    </header>
 
-    <!-- About Me Section -->
-    <section id="about">
-        <h2>About Me</h2>
-        <p>
-            <!-- Add a brief introduction about yourself here -->
-            Hello! My name is [Your Name]. I am passionate about [your interests or profession]. 
-            Welcome to my portfolio website!
-        </p>
-    </section>
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#credentials">Credentials</a>
+    <a href="#contact">Contact</a>
+  </nav>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Projects</h2>
-        <p>
-            <!-- Add a list or description of your projects here -->
-            Here are some of the projects I have worked on:
-        </p>
-        <ul>
-            <li>Project 1: [Brief description] <a href="[link to project repository]" target="_blank">[Project repository]</a></li>
-            <li>Project 2: [Brief description] <a href="[link to project repository]" target="_blank">[Project repository]</a></li>
-        </ul>
-    </section>
+  <section class="hero">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="blob blob-4"></div>
 
-    <!-- Credentials Section -->
-    <section id="credentials">
-        <h2>Credentials</h2>
-        <p>
-            <!-- Add your credentials, certifications, or achievements here -->
-            I have earned the following certifications and achievements:
-        </p>
-        <ul>
-            <li>Certification 1: [Details]</li>
-            <li>Certification 2: [Details]</li>
-            <li>Certification 3: [Details]</li>
-            <!-- Add images of your certification digital badges -->
-        </ul>
-    </section>
+    <span class="hero-badge">✦ Portfolio</span>
+    <h1>Eva<br><em>Casalins-DeBoskey</em></h1>
+    <p>Hello! Welcome to my little corner of the internet — a place to share my work, passions, and creative journey.</p>
+    <div class="hero-buttons">
+      <a href="#projects" class="btn btn-primary">View My Work</a>
+      <a href="#contact" class="btn btn-outline">Get in Touch</a>
+    </div>
+  </section>
 
-    <!-- Contact Info Section -->
-    <section id="contact">
-        <h2>Contact Info</h2>
-        <p>
-            <!-- Add your contact information here -->
-            Feel free to reach out to me:
-        </p>
-        <ul>
-            <li>Email: [your-email@example.com]</li>
-            <li>LinkedIn: <a href="[your-linkedin-profile]" target="_blank">[Your LinkedIn]</a></li>
-        </ul>
-    </section>
+  <div class="petal-divider">✿ ❀ ✿</div>
 
-    <!-- Footer Section -->
-    <footer>
-        <p>&copy; 2025 [Your Name]. All rights reserved.</p>
-    </footer>
+  <section id="about" class="section">
+    <div class="section-label"><span>About Me</span></div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <h2>A little about <em>me</em></h2>
+        <p>Hi, I'm Eva! I am passionate about [your interests or profession]. I love creating things that are thoughtful, beautiful, and meaningful.</p>
+        <p>When I'm not working on projects, you can find me [your hobbies or interests]. Feel free to explore my work below!</p>
+      </div>
+      <div class="about-card">
+        <div class="avatar">E</div>
+        <h3>Eva Casalins-DeBoskey</h3>
+        <p>[Your title or tagline]</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <div class="section-label"><span>Projects</span></div>
+    <h2 class="fade-in">Things I've <em>made</em></h2>
+    <div class="projects-grid fade-in">
+      <div class="project-card pc-pink">
+        <span class="tag">Project 1</span>
+        <h3>[Project Name]</h3>
+        <p>[Brief description of your project and what you learned or accomplished with it.]</p>
+        <a href="#" class="link">View project</a>
+      </div>
+      <div class="project-card pc-blue">
+        <span class="tag">Project 2</span>
+        <h3>[Project Name]</h3>
+        <p>[Brief description of your project and what you learned or accomplished with it.]</p>
+        <a href="#" class="link">View project</a>
+      </div>
+      <div class="project-card pc-green">
+        <span class="tag">Project 3</span>
+        <h3>[Project Name]</h3>
+        <p>[Brief description of your project and what you learned or accomplished with it.]</p>
+        <a href="#" class="link">View project</a>
+      </div>
+      <div class="project-card pc-gold">
+        <span class="tag">Project 4</span>
+        <h3>[Project Name]</h3>
+        <p>[Brief description of your project and what you learned or accomplished with it.]</p>
+        <a href="#" class="link">View project</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="credentials" class="section">
+    <div class="section-label"><span>Credentials</span></div>
+    <h2 class="fade-in">What I've <em>earned</em></h2>
+    <div class="cred-list fade-in">
+      <div class="cred-item">
+        <div class="cred-icon ci-pink">🌸</div>
+        <div class="cred-info">
+          <h4>[Certification Name]</h4>
+          <p>[Issuing organization · Year]</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon ci-blue">🌿</div>
+        <div class="cred-info">
+          <h4>[Certification Name]</h4>
+          <p>[Issuing organization · Year]</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon ci-green">🌻</div>
+        <div class="cred-info">
+          <h4>[Certification Name]</h4>
+          <p>[Issuing organization · Year]</p>
+        </div>
+      </div>
+      <div class="cred-item">
+        <div class="cred-icon ci-yellow">✨</div>
+        <div class="cred-info">
+          <h4>[Achievement or Award]</h4>
+          <p>[Details · Year]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="section-label"><span>Contact</span></div>
+    <div class="contact-wrap fade-in">
+      <h2>Let's <em>connect</em></h2>
+      <p>I'd love to hear from you — whether it's about a project, collaboration, or just to say hello!</p>
+      <div class="contact-links">
+        <a href="mailto:your-email@example.com" class="contact-chip">
+          <span>✉</span> your-email@example.com
+        </a>
+        <a href="#" class="contact-chip" target="_blank">
+          <span>💼</span> LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Made with love ✿ &copy; 2025 Eva Casalins-DeBoskey</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
 </body>
 </html>
